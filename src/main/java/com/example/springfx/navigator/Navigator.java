@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FxNavigator {
+public class Navigator {
 
     private final String applicationTitle;
     private final FxWeaver fxWeaver;
 
-    public FxNavigator(@Value("${spring.application.ui.title}") String applicationTitle,
-                       FxWeaver fxWeaver) {
+    public Navigator(@Value("${spring.application.ui.title}") String applicationTitle,
+                     FxWeaver fxWeaver) {
         this.applicationTitle = applicationTitle;
         this.fxWeaver = fxWeaver;
     }

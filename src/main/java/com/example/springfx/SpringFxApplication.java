@@ -1,6 +1,6 @@
 package com.example.springfx;
 
-import com.example.springfx.navigator.FxNavigator;
+import com.example.springfx.navigator.Navigator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -20,8 +20,8 @@ public class SpringFxApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		configurableApplicationContext = SpringApplication.run(SpringFxApplication.class, getParameters().getRaw().toArray(new String[0]));
-		FxNavigator fxNavigator = configurableApplicationContext.getBean("fxNavigator", FxNavigator.class);
-		fxNavigator.navigate(null, primaryStage);
+		Navigator navigator = configurableApplicationContext.getBean("navigator", Navigator.class);
+		navigator.navigate(null, primaryStage);
 	}
 
 	@Override
