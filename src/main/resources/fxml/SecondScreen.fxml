@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.springfx.controller.SecondScreenController"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <Label text="Second screen"/>
+    <Button text="Back" onAction="#back"/>
+
+</VBox>

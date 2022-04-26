@@ -1,10 +1,10 @@
-package com.example.springfxgit;
+package com.example.springfx;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringFxGitApplicationTests {
+class SpringFxApplicationTests {
 
 	@Test
 	void contextLoads() {
