@@ -2,20 +2,20 @@ package com.example.springfx.controller;
 
 import com.example.springfx.config.ConfigKey;
 import com.example.springfx.config.GlobalConfig;
-import com.example.springfx.navigator.Navigator;
+import com.example.springfx.navigator.FxNavigator;
 import javafx.application.Platform;
 import org.springframework.stereotype.Component;
 
 @Component
 public abstract class BaseController {
-    private  Navigator navigator;
+    private FxNavigator fxNavigator;
 
-    public BaseController(Navigator navigator) {
-        this.navigator = navigator;
+    public BaseController(FxNavigator fxNavigator) {
+        this.fxNavigator = fxNavigator;
     }
 
     protected <CONTROLLER extends BaseController> void navigate(Class<CONTROLLER> controllerClass) {
-        Platform.runLater(() -> navigator.navigate(controllerClass, GlobalConfig.get(ConfigKey.CURRENT_STAGE)));
+        Platform.runLater(() -> fxNavigator.navigate(controllerClass, GlobalConfig.get(ConfigKey.CURRENT_STAGE)));
     }
 
 

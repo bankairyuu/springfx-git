@@ -1,6 +1,6 @@
 package com.example.springfx.controller;
 
-import com.example.springfx.navigator.Navigator;
+import com.example.springfx.navigator.FxNavigator;
 import javafx.event.ActionEvent;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @FxmlView("/fxml/MainWindow.fxml")
 public class MainWindowController extends BaseController {
 
-    public MainWindowController(Navigator navigator) {
-        super(navigator);
+    public MainWindowController(FxNavigator fxNavigator) {
+        super(fxNavigator);
     }
 
     public void navigateToSecondScreen(ActionEvent actionEvent) {
