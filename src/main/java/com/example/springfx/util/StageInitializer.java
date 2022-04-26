@@ -11,17 +11,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import java.util.Stack;
-
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
     private final String applicationTitle;
     private final FxWeaver fxWeaver;
-
-    private Stage currentStage = null;
-
-    private Stack<Stage> stageStack = new Stack<>();
 
     public StageInitializer(@Value("${spring.application.ui.title}") String applicationTitle,
                             FxWeaver fxWeaver) {
@@ -31,14 +25,14 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
-        currentStage = event.getStage();
-        GlobalConfig.set(ConfigKey.CURRENT_STAGE, currentStage);
-        if (event.getController() == null) {
-            currentStage.setScene(new Scene(fxWeaver.loadView(MainWindowController.class), 800, 600));
+        Stage stage = event.getStage();
+        GlobalConfig.set(ConfigKey.CURRENT_STAGE, stage);
+        if (event.getControllerClass() == null) {
+            stage.setScene(new Scene(fxWeaver.loadView(MainWindowController.class), 800, 600));
         } else {
-            currentStage.setScene(new Scene(fxWeaver.loadView(event.getController()), 800, 600));
+            stage.setScene(new Scene(fxWeaver.loadView(event.getControllerClass()), 800, 600));
         }
-        currentStage.setTitle(applicationTitle);
-        currentStage.show();
+        stage.setTitle(applicationTitle);
+        stage.show();
     }
 }

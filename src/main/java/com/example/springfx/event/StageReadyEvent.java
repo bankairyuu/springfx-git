@@ -6,23 +6,23 @@ import org.springframework.context.ApplicationEvent;
 
 public class StageReadyEvent extends ApplicationEvent {
 
-    private final Class<? extends BaseController> controller;
+    private final Class<? extends BaseController> controllerClass;
 
     public StageReadyEvent(Stage stage) {
         super(stage);
-        controller = null;
+        controllerClass = null;
     }
 
-    public <CONTROLLER extends BaseController> StageReadyEvent(Stage stage, Class<CONTROLLER> controller) {
+    public <CONTROLLER extends BaseController> StageReadyEvent(Stage stage, Class<CONTROLLER> controllerClass) {
         super(stage);
-        this.controller = controller;
+        this.controllerClass = controllerClass;
     }
 
     public Stage getStage() {
         return ((Stage) getSource());
     }
 
-    public Class<? extends BaseController> getController() {
-        return controller;
+    public Class<? extends BaseController> getControllerClass() {
+        return controllerClass;
     }
 }

@@ -14,7 +14,7 @@ public final class Navigator {
         this.applicationContext = applicationContext;
     }
 
-    public void navigate(Class<? extends BaseController> controller, Stage stage){
-        applicationContext.publishEvent(new StageReadyEvent(stage, controller));
+    public <CONTROLLER extends BaseController> void navigate(Class<CONTROLLER> controllerClass, Stage stage){
+        applicationContext.publishEvent(new StageReadyEvent(stage, controllerClass));
     }
 }

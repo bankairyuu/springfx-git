@@ -14,8 +14,8 @@ public abstract class BaseController {
         this.navigator = navigator;
     }
 
-    protected void navigate(Class<? extends BaseController> controller) {
-        Platform.runLater(() -> navigator.navigate(controller, GlobalConfig.get(ConfigKey.CURRENT_STAGE)));
+    protected <CONTROLLER extends BaseController> void navigate(Class<CONTROLLER> controllerClass) {
+        Platform.runLater(() -> navigator.navigate(controllerClass, GlobalConfig.get(ConfigKey.CURRENT_STAGE)));
     }
 
 
