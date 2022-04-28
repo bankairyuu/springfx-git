@@ -7,14 +7,18 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/fxml/MainWindow.fxml")
-public class MainWindowController extends BaseController {
+@FxmlView("/fxml/MainScreen.fxml")
+public class MainScreenController extends BaseController {
 
-    public MainWindowController(Navigator navigator, StageStore stageStore) {
+    public MainScreenController(Navigator navigator, StageStore stageStore) {
         super(navigator, stageStore);
     }
 
     public void navigateToSecondScreen(ActionEvent actionEvent) {
         navigate(SecondScreenController.class);
+    }
+
+    public void navigateToErrorScreen(ActionEvent actionEvent) {
+        navigate(null);
     }
 }

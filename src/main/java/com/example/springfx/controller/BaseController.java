@@ -16,8 +16,10 @@ public abstract class BaseController {
     }
 
     protected <CONTROLLER extends BaseController> void navigate(Class<CONTROLLER> controllerClass) {
-        Platform.runLater(() -> navigator.navigate(controllerClass, stageStore.getCurrentStage()));
+        Platform.runLater(() -> navigator.navigate(controllerClass));
     }
 
-
+    protected void navigateBack(){
+        Platform.runLater(navigator::navigateBack);
+    }
 }
