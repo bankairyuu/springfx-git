@@ -1,17 +1,17 @@
 package com.example.springfx;
 
-import com.example.springfx.event.StageReadyEvent;
+import com.example.springfx.navigator.Navigator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class SpringFxApplication extends Application{
+public class SpringFxApplication extends Application {
 
-	private ConfigurableApplicationContext applicationContext;
+	private ConfigurableApplicationContext configurableApplicationContext;
 
 	public static void main(String[] args) {
 		Application.launch(SpringFxApplication.class, args);
@@ -19,18 +19,14 @@ public class SpringFxApplication extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		applicationContext.publishEvent(new StageReadyEvent(primaryStage));
-	}
-
-	@Override
-	public void init() throws Exception {
-		super.init();
-		applicationContext = new SpringApplicationBuilder(SpringFxApplication.class).run();
+		configurableApplicationContext = SpringApplication.run(SpringFxApplication.class, getParameters().getRaw().toArray(new String[0]));
+		Navigator navigator = configurableApplicationContext.getBean("navigator", Navigator.class);
+		navigator.navigate(null, primaryStage);
 	}
 
 	@Override
 	public void stop() throws Exception {
-		applicationContext.close();
+		configurableApplicationContext.close();
 		Platform.exit();
 	}
 
