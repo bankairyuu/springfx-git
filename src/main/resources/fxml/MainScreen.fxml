@@ -7,7 +7,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.springfx.controller.MainScreenController"
-      alignment="CENTER">
+      alignment="CENTER" spacing="10">
 
 
     <Label text="SpringFx"/>

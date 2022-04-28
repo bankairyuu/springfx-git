@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @FxmlView("/fxml/SecondScreen.fxml")
-public class SecondScreenController extends BaseController{
+public class SecondScreenController extends BaseController {
 
     public SecondScreenController(Navigator navigator, StageStore stageStore) {
         super(navigator, stageStore);

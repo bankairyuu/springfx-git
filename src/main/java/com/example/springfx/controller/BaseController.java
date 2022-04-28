@@ -19,7 +19,7 @@ public abstract class BaseController {
         Platform.runLater(() -> navigator.navigate(controllerClass));
     }
 
-    protected void navigateBack(){
+    protected void navigateBack() {
         Platform.runLater(navigator::navigateBack);
     }
 }
