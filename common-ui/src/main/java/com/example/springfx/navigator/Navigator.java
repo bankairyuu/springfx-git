@@ -1,6 +1,7 @@
 package com.example.springfx.navigator;
 
 import com.example.springfx.composer.Composer;
+import com.example.springfx.config.navigation.NavigationEntryStore;
 import com.example.springfx.controller.BaseController;
 import com.example.springfx.controller.ErrorScreenController;
 import javafx.scene.Scene;
@@ -17,10 +18,14 @@ public class Navigator<CONTROLLER extends BaseController> {
     private String mainScreen;
     private Stack<Pair<Class<CONTROLLER>, Scene>> sceneStack;
 
+    private final NavigationEntryStore navigationEntryStore;
+
     public Navigator(@Value("${springfx.mainscreen}") String mainScreen,
-                     Composer composer) {
+                     Composer composer,
+                     NavigationEntryStore navigationEntryStore) {
         this.mainScreen = mainScreen;
         this.composer = composer;
+        this.navigationEntryStore = navigationEntryStore;
     }
 
     public void navigate(Class<CONTROLLER> controllerClass) {
@@ -39,8 +44,8 @@ public class Navigator<CONTROLLER extends BaseController> {
 
     }
 
-    public void navigateTo(String target) {
-        Pair<Class<CONTROLLER>, Scene> scenePair = composer.composeController(target);
+    public void navigateTo(String targetScreen) {
+        Pair<Class<CONTROLLER>, Scene> scenePair = composer.composeController(navigationEntryStore.getController(targetScreen));
         sceneStack.push(scenePair);
         composer.display(scenePair);
     }

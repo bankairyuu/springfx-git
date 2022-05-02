@@ -1,12 +1,12 @@
 [
   {
-    "module" : "app-main",
-    "screen" : "mainScreen",
-    "beanName" : "mainScreenController"
+    "module": "app-main",
+    "screen": "mainScreen",
+    "beanName": "mainScreenController"
   },
   {
-    "module" : "app-secondary",
-    "screen" : "secondScreen",
-    "beanName" : "secondScreenController"
+    "module": "app-secondary",
+    "screen": "secondScreen",
+    "beanName": "secondScreenController"
   }
 ]
