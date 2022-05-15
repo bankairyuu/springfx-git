@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.springfx.controller.ErrorScreenController"
-      alignment="CENTER" spacing="10">
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.springfx.controller.ErrorScreenController">
 
-    <Label text="Required screen could not be loaded"/>
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+
+    <Label text="This is a basic error screen"/>
     <Separator/>
-    <Button text="Navigate back" onAction="#onActionNavigateBack"/>
+    <TextArea prefHeight="200.0" prefWidth="200.0" text="Here you can see some error messages or anything" editable="false"/>
+    <Button onAction="#onActionNavigateBack" text="Navigate back"/>
 
 </VBox>

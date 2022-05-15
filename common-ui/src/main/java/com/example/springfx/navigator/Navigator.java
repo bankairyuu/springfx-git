@@ -1,7 +1,6 @@
 package com.example.springfx.navigator;
 
 import com.example.springfx.composer.Composer;
-import com.example.springfx.config.navigation.NavigationEntryStore;
 import com.example.springfx.controller.BaseController;
 import com.example.springfx.controller.ErrorScreenController;
 import javafx.scene.Scene;
@@ -13,39 +12,19 @@ import org.springframework.stereotype.Component;
 import java.util.Stack;
 
 @Component
-public class Navigator<CONTROLLER extends BaseController> {
+public class Navigator {
     private final Composer composer;
     private String mainScreen;
-    private Stack<Pair<Class<CONTROLLER>, Scene>> sceneStack;
-
-    private final NavigationEntryStore navigationEntryStore;
+    private Stack<Pair<Class<? extends BaseController>, Scene>> sceneStack;
 
     public Navigator(@Value("${springfx.mainscreen}") String mainScreen,
-                     Composer composer,
-                     NavigationEntryStore navigationEntryStore) {
+                     Composer composer) {
         this.mainScreen = mainScreen;
         this.composer = composer;
-        this.navigationEntryStore = navigationEntryStore;
-    }
-
-    public void navigate(Class<CONTROLLER> controllerClass) {
-        controllerClass = controllerClass == null
-                ? (Class<CONTROLLER>) ErrorScreenController.class
-                : controllerClass;
-
-        if (sceneStack.size() > 2 && sceneStack.elementAt(sceneStack.size() - 2).getKey().equals(controllerClass)) {
-            sceneStack.pop();
-            sceneStack.pop();
-        }
-
-        Pair<Class<CONTROLLER>, Scene> scenePair = composer.compose(controllerClass);
-        sceneStack.push(scenePair);
-        composer.display(scenePair);
-
     }
 
     public void navigateTo(String targetScreen) {
-        Pair<Class<CONTROLLER>, Scene> scenePair = composer.composeController(navigationEntryStore.getController(targetScreen));
+        Pair<Class<? extends BaseController>, Scene> scenePair = composer.composeController(targetScreen + "Controller");
         sceneStack.push(scenePair);
         composer.display(scenePair);
     }
@@ -53,7 +32,7 @@ public class Navigator<CONTROLLER extends BaseController> {
     public void navigateToMainScreen(Stage primaryStage) {
         validateMainScreenName();
 
-        Pair<Class<CONTROLLER>, Scene> scenePair = composer.composeMain(mainScreen);
+        Pair<Class<? extends BaseController>, Scene> scenePair = composer.composeMain(mainScreen);
         if (sceneStack == null) {
             sceneStack = new Stack<>();
             sceneStack.push(scenePair);
@@ -76,7 +55,7 @@ public class Navigator<CONTROLLER extends BaseController> {
     }
 
     public void navigateBack() {
-        Pair<Class<CONTROLLER>, Scene> pop = sceneStack.pop();
+        Pair<Class<? extends BaseController>, Scene> pop = sceneStack.pop();
         if (pop.getKey().equals(ErrorScreenController.class)) {
             pop = sceneStack.peek();
         }

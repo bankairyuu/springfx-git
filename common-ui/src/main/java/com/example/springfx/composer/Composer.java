@@ -11,7 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Composer<CONTROLLER extends BaseController> {
+public class Composer {
     private final Double height;
     private final Double width;
     private final ConfigurableApplicationContext applicationContext;
@@ -33,16 +33,16 @@ public class Composer<CONTROLLER extends BaseController> {
         this.applicationTitle = applicationTitle;
     }
 
-    public Pair<Class<CONTROLLER>, Scene> compose(Class<CONTROLLER> controllerClass) {
+    public Pair<Class<? extends BaseController>, Scene> compose(Class<? extends BaseController> controllerClass) {
         return new Pair<>(controllerClass, new Scene(fxWeaver.loadView(controllerClass), width, height));
     }
 
-    public Pair<Class<CONTROLLER>, Scene> composeMain(String mainScreen) {
-        Class<CONTROLLER> mainScreenClass = (Class<CONTROLLER>) applicationContext.getBean(mainScreen + "Controller", BaseController.class).getClass();
+    public Pair<Class<? extends BaseController>, Scene> composeMain(String mainScreen) {
+        Class<? extends BaseController> mainScreenClass = applicationContext.getBean(mainScreen + "Controller", BaseController.class).getClass();
         return new Pair<>(mainScreenClass, new Scene(fxWeaver.loadView(mainScreenClass), width, height));
     }
 
-    public void display(Pair<Class<CONTROLLER>, Scene> scenePair) {
+    public void display(Pair<Class<? extends BaseController>, Scene> scenePair) {
         Stage stage = stageStore.getCurrentStage();
 
         stage.setScene(scenePair.getValue());
@@ -50,8 +50,8 @@ public class Composer<CONTROLLER extends BaseController> {
         stage.show();
     }
 
-    public Pair<Class<CONTROLLER>, Scene> composeController(String target) {
-        Class<CONTROLLER> targetController = (Class<CONTROLLER>) applicationContext.getBean(target, BaseController.class).getClass();
+    public Pair<Class<? extends BaseController>, Scene> composeController(String target) {
+        Class<? extends BaseController> targetController = applicationContext.getBean(target, BaseController.class).getClass();
         return new Pair<>(targetController, new Scene(fxWeaver.loadView(targetController), width, height));
     }
 }

@@ -10,13 +10,11 @@ public abstract class BaseController {
     private final Navigator navigator;
     private final StageStore stageStore;
 
+    protected static final String ERROR_SCREEN = "errorScreen";
+
     public BaseController(Navigator navigator, StageStore stageStore) {
         this.navigator = navigator;
         this.stageStore = stageStore;
-    }
-
-    protected <CONTROLLER extends BaseController> void navigate(Class<CONTROLLER> controllerClass) {
-        Platform.runLater(() -> navigator.navigate(controllerClass));
     }
 
     protected void navigateTo(String controllerClass){
@@ -25,5 +23,9 @@ public abstract class BaseController {
 
     protected void navigateBack() {
         Platform.runLater(navigator::navigateBack);
+    }
+
+    protected StageStore getStageStore(){
+        return stageStore;
     }
 }
